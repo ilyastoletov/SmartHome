@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">Smart House</string>
+    <string name="tabs_header">Мой дом</string>
+</resources>
