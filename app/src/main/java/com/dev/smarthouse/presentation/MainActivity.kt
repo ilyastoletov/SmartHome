@@ -90,7 +90,7 @@ private fun Tabs(tabsList: List<TabItem>, pagerState: PagerState) {
         indicator = { tabPosition ->
             TabRowDefaults.Indicator(
                 modifier = Modifier.pagerTabIndicatorOffset(pagerState, tabPosition),
-                height = 5.dp,
+                height = 3.dp,
                 color = Blue
             ) },
         backgroundColor = White

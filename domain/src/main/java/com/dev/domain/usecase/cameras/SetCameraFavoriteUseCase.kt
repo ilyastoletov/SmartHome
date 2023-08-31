@@ -1,4 +1,4 @@
-package com.dev.domain.usecase
+package com.dev.domain.usecase.cameras
 
 import com.dev.domain.repository.CamerasRepository
 

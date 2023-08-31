@@ -2,10 +2,13 @@ package com.dev.data.di
 
 import com.dev.data.remote.clients.ApiClient
 import com.dev.data.repository.CameraRepoImpl
+import com.dev.data.repository.DoorRepoImpl
 import com.dev.data.storage.model.CameraRealm
+import com.dev.data.storage.model.DoorRealm
 import com.dev.data.storage.model.RoomRealm
 import com.dev.data.utils.NetworkConfig
 import com.dev.domain.repository.CamerasRepository
+import com.dev.domain.repository.DoorsRepository
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -31,7 +34,7 @@ class DataModule {
     @Provides
     @Singleton
     fun provideRealmConfig(): RealmConfiguration {
-        return RealmConfiguration.create(setOf(RoomRealm::class, CameraRealm::class))
+        return RealmConfiguration.create(setOf(RoomRealm::class, CameraRealm::class, DoorRealm::class))
     }
 
     @Provides
@@ -40,8 +43,14 @@ class DataModule {
 
     @Provides
     @Singleton
-    fun provideCamerasRepository(apiClient: ApiClient, realmConfig: RealmConfiguration): CamerasRepository {
-        return CameraRepoImpl(apiClient, realmConfig)
+    fun provideCameraRepository(apiClient: ApiClient, realmConfiguration: RealmConfiguration): CamerasRepository {
+        return CameraRepoImpl(apiClient, realmConfiguration)
+    }
+
+    @Provides
+    @Singleton
+    fun provideDoorsRepository(apiClient: ApiClient, realmConfiguration: RealmConfiguration): DoorsRepository {
+        return DoorRepoImpl(apiClient, realmConfiguration)
     }
 
 }

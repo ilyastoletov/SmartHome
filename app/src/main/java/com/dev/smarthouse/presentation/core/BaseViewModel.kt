@@ -16,11 +16,9 @@ import kotlinx.coroutines.launch
 
 interface ViewEvent
 
-interface ViewEffect
-
 interface ViewState
 
-abstract class BaseViewModel<Event: ViewEvent, Effect: ViewEffect, State: ViewState>
+abstract class BaseViewModel<Event: ViewEvent, State: ViewState>
     (protected val dispatcher: CoroutineDispatcher = Dispatchers.IO) : ViewModel() {
 
     private val initialState: State by lazy { setInitialState() }
@@ -34,9 +32,6 @@ abstract class BaseViewModel<Event: ViewEvent, Effect: ViewEffect, State: ViewSt
 
     private val _event: MutableSharedFlow<Event> = MutableSharedFlow()
     val event: SharedFlow<Event> = _event.asSharedFlow()
-
-    private val _effect: Channel<Effect> = Channel()
-    val effect = _effect.receiveAsFlow()
 
     init {
         subscribeToEvents()
@@ -55,10 +50,5 @@ abstract class BaseViewModel<Event: ViewEvent, Effect: ViewEffect, State: ViewSt
     protected fun setState(reducer: State.() -> State) {
         val newState = state.value.reducer()
         _viewState.value = newState
-    }
-
-    protected fun setEffect(builder: () -> Effect) {
-        val effectValue = builder()
-        viewModelScope.launch { _effect.send(effectValue) }
     }
 }

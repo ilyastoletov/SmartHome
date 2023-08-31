@@ -1,19 +1,19 @@
 package com.dev.smarthouse.presentation.screens.cameras.contract
 
 import androidx.lifecycle.viewModelScope
-import com.dev.domain.usecase.GetCamerasListUseCase
-import com.dev.domain.usecase.SetCameraFavoriteUseCase
+import com.dev.domain.usecase.cameras.GetCamerasListUseCase
+import com.dev.domain.usecase.cameras.SetCameraFavoriteUseCase
 import com.dev.domain.utils.Response
 import com.dev.smarthouse.presentation.core.BaseViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.runBlocking
 import javax.inject.Inject
 
 @HiltViewModel
 class CameraViewModel @Inject constructor(private val getCamerasListUseCase: GetCamerasListUseCase,
-                                          private val setCameraFavoriteUseCase: SetCameraFavoriteUseCase)
-    : BaseViewModel<CameraContract.Event, CameraContract.Effect, CameraContract.State>() {
+                                          private val setCameraFavoriteUseCase: SetCameraFavoriteUseCase
+)
+    : BaseViewModel<CameraContract.Event, CameraContract.State>() {
 
     override fun setInitialState(): CameraContract.State = CameraContract.State.Loading
 

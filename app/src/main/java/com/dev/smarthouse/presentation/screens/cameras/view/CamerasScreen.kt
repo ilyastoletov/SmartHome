@@ -1,10 +1,15 @@
 package com.dev.smarthouse.presentation.screens.cameras.view
 
 import android.content.Context
+import android.os.CombinedVibration
+import android.os.VibrationEffect
+import android.os.Vibrator
+import android.os.VibratorManager
 import android.util.Log
 import androidx.compose.animation.core.tween
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import android.os.Build
 import androidx.compose.foundation.border
 import androidx.compose.foundation.gestures.Orientation
 import androidx.compose.foundation.layout.Box
@@ -66,7 +71,10 @@ import com.dev.smarthouse.presentation.theme.Grey
 import com.dev.smarthouse.presentation.theme.Typography
 import com.dev.smarthouse.presentation.ui.failure.NetworkFailureScreen
 import com.dev.smarthouse.presentation.ui.loading.LoadingScreen
+import com.dev.smarthouse.presentation.utils.makeSmallVibration
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.runBlocking
 import kotlin.math.roundToInt
 
 @Composable
@@ -101,6 +109,7 @@ private fun Content(roomsList: List<Room>, onEvent: (CameraContract.Event) -> Un
         onRefresh = {
             refreshingState.value = true
             onEvent(CameraContract.Event.LoadCameras(true))
+            runBlocking { delay(1000L) }
             refreshingState.value = false
         }
     )
@@ -163,6 +172,7 @@ private fun CameraItem(camera: Camera, onEvent: (CameraContract.Event) -> Unit) 
             scope.launch {
                 swipeState.animateTo(0, tween(600, 0))
             }
+            makeSmallVibration(context)
             val newFavoriteValue = !camera.isFavorite
             onEvent(CameraContract.Event.SetCamFavorite(
                 roomName = camera.roomName!!,
@@ -227,9 +237,9 @@ private fun CameraItem(camera: Camera, onEvent: (CameraContract.Event) -> Unit) 
                     if (camera.isRec) {
                         Image(
                             modifier = Modifier
-                                .width(30.dp)
-                                .height(30.dp)
-                                .padding(top = 3.dp, start = 3.dp)
+                                .width(40.dp)
+                                .height(40.dp)
+                                .padding(top = 4.dp, start = 4.dp)
                                 .align(Alignment.TopStart),
                             painter = painterResource(id = R.drawable.rec),
                             contentDescription = "rec"

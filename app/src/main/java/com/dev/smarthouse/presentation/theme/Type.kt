@@ -32,5 +32,12 @@ val Typography = Typography(
         fontFamily = FontFamily(Font(R.font.circe_light)),
         fontWeight = FontWeight(300),
         color = Color(0xFF333333),
+    ),
+    titleSmall = TextStyle(
+        fontSize = 14.sp,
+        fontFamily = FontFamily(Font(R.font.circe_regular)),
+        fontWeight = FontWeight(400),
+        color = Color(0xFF333333),
+        textAlign = TextAlign.Center,
     )
 )

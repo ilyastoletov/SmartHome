@@ -2,4 +2,5 @@
     <string name="app_name">Smart House</string>
     <string name="tabs_header">Мой дом</string>
     <string name="no_internet">Не удалось загрузить данные - нестабильное соединение с сетью. Проверьте подключение к сети и повторите попытку.</string>
+    <string name="door_new_name">Новое название двери</string>
 </resources>
