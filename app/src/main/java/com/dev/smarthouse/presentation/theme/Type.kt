@@ -10,7 +10,6 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.sp
 import com.dev.smarthouse.R
 
-// Set of Material typography styles to start with
 val Typography = Typography(
     headlineLarge = TextStyle(
         fontSize = 21.sp,
@@ -27,5 +26,11 @@ val Typography = Typography(
     fontWeight = FontWeight(400),
     color = Color(0xFF333333),
     textAlign = TextAlign.Center,
+    ),
+    headlineMedium = TextStyle(
+        fontSize = 21.sp,
+        fontFamily = FontFamily(Font(R.font.circe_light)),
+        fontWeight = FontWeight(300),
+        color = Color(0xFF333333),
     )
 )

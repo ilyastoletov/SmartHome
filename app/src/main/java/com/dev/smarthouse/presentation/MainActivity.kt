@@ -40,8 +40,10 @@ import com.google.accompanist.pager.HorizontalPager
 import com.google.accompanist.pager.PagerState
 import com.google.accompanist.pager.pagerTabIndicatorOffset
 import com.google.accompanist.pager.rememberPagerState
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 
+@AndroidEntryPoint
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

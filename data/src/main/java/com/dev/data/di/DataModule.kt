@@ -1,7 +1,11 @@
 package com.dev.data.di
 
+import com.dev.data.remote.clients.ApiClient
+import com.dev.data.repository.CameraRepoImpl
+import com.dev.data.storage.model.CameraRealm
 import com.dev.data.storage.model.RoomRealm
 import com.dev.data.utils.NetworkConfig
+import com.dev.domain.repository.CamerasRepository
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -27,7 +31,17 @@ class DataModule {
     @Provides
     @Singleton
     fun provideRealmConfig(): RealmConfiguration {
-        return RealmConfiguration.create(setOf(RoomRealm::class))
+        return RealmConfiguration.create(setOf(RoomRealm::class, CameraRealm::class))
+    }
+
+    @Provides
+    @Singleton
+    fun provideApiClient(retrofit: Retrofit): ApiClient = retrofit.create(ApiClient::class.java)
+
+    @Provides
+    @Singleton
+    fun provideCamerasRepository(apiClient: ApiClient, realmConfig: RealmConfiguration): CamerasRepository {
+        return CameraRepoImpl(apiClient, realmConfig)
     }
 
 }
